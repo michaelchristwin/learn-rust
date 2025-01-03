@@ -3,7 +3,7 @@ mod conversion;
 mod ownership;
 mod types;
 use crate::control_flow::{cf, lp};
-use crate::conversion::{convert_from, convert_into};
+use crate::conversion::{convert_from, convert_into, convert_string, convert_try};
 use crate::ownership::{first_word, ownership};
 use crate::types::{aliasing, casting, inference, literals};
 
@@ -18,4 +18,6 @@ fn main() {
     aliasing();
     convert_from();
     convert_into();
+    convert_try();
+    convert_string();
 }
