@@ -47,3 +47,18 @@ pub fn aliasing() {
         nanoseconds + inches
     );
 }
+
+enum Avatar {
+    Eren,
+    Armin,
+}
+
+struct Character {
+    person: Avatar,
+    quality: String,
+}
+
+ let hero = Character{
+    person: Avatar::Eren,
+    quality:String::from("Decisive"),
+}
