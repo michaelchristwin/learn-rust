@@ -48,17 +48,22 @@ pub fn aliasing() {
     );
 }
 
+#[derive(Debug)]
 enum Avatar {
     Eren,
     Armin,
 }
 
+#[derive(Debug)]
 struct Character {
     person: Avatar,
     quality: String,
 }
 
- let hero = Character{
-    person: Avatar::Eren,
-    quality:String::from("Decisive"),
+pub fn create_hero() {
+    let hero: Character = Character {
+        person: Avatar::Eren,
+        quality: String::from("Decisive"),
+    };
+    println!("Hero: {:?} - {}", hero.person, hero.quality);
 }
