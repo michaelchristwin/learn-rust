@@ -18,6 +18,12 @@ enum Color {
     CMYK(u32, u32, u32, u32),
 }
 
+#[derive(Debug)]
+enum IpAddr {
+    V4(String),
+    V6(String),
+}
+
 fn main() {
     cf();
     lp();
@@ -112,4 +118,9 @@ fn main() {
             c, m, y, k
         ),
     }
+
+    let home = IpAddr::V4(String::from("127.0.0.1"));
+    let loopback = IpAddr::V6(String::from("::1"));
+    println!("My local IP is {:?}", home);
+    println!("My loopback IP is {:?}", loopback);
 }
