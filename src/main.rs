@@ -18,12 +18,6 @@ enum Color {
     CMYK(u32, u32, u32, u32),
 }
 
-#[derive(Debug)]
-enum IpAddr {
-    V4(String),
-    V6(String),
-}
-
 fn main() {
     cf();
     lp();
@@ -119,8 +113,73 @@ fn main() {
         ),
     }
 
+    #[derive(Debug)]
+    #[allow(dead_code)]
+    enum IpAddr {
+        V4(String),
+        V6(String),
+    }
     let home = IpAddr::V4(String::from("127.0.0.1"));
     let loopback = IpAddr::V6(String::from("::1"));
     println!("My local IP is {:?}", home);
     println!("My loopback IP is {:?}", loopback);
+
+    // Traits
+    pub trait Summary {
+        fn summarize(&self) -> String {
+            String::from("(Read more...)")
+        }
+    }
+
+    #[allow(dead_code)]
+    pub struct NewsArticle {
+        pub headline: String,
+        pub location: String,
+        pub author: String,
+        pub content: String,
+    }
+
+    impl Summary for NewsArticle {
+        fn summarize(&self) -> String {
+            format!("{}, by {} ({})", self.headline, self.author, self.location)
+        }
+    }
+
+    #[allow(dead_code)]
+    pub struct SocialPost {
+        pub username: String,
+        pub content: String,
+        pub reply: bool,
+        pub repost: bool,
+    }
+
+    impl Summary for SocialPost {
+        fn summarize(&self) -> String {
+            format!("{}: {}", self.username, self.content)
+        }
+    }
+
+    pub fn notify(item: &impl Summary) {
+        println!("Breaking news! {}", item.summarize());
+    }
+
+    let post = SocialPost {
+        username: String::from("horse_ebooks"),
+        content: String::from("of course, as you probably already know, people"),
+        reply: false,
+        repost: false,
+    };
+    println!("1 new post: {}", post.summarize());
+
+    let article = NewsArticle {
+        headline: String::from("Penguins win the Stanley Cup Championship!"),
+        location: String::from("Pittsburgh, PA, USA"),
+        author: String::from("Iceburgh"),
+        content: String::from(
+            "The Pittsburgh Penguins once again are the best \
+             hockey team in the NHL.",
+        ),
+    };
+    println!("New article available! {}", article.summarize());
+    //concrete types
 }
